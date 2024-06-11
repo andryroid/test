@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ApiResource(
     description: 'Api pour gérer les acteurs d\'un film'
@@ -23,6 +24,7 @@ class Acteur
     private ?int $id = null;
 
     #[ORM\Column(length: 50)]
+    #[Groups(['film:item:read'])]
     private ?string $nom = null;
 
     #[ORM\Column(type: Types::SMALLINT)]
@@ -98,6 +100,7 @@ class Acteur
         return $this;
     }
 
+    #[Groups(['film:item:read'])]
     public function getSexe(): string
     {
         return $this->genre === 0 ? self::FEMININ : self::MASCULIN;
