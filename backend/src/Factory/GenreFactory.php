@@ -29,6 +29,7 @@ use Zenstruck\Foundry\RepositoryProxy;
  */
 final class GenreFactory extends ModelFactory
 {
+    private const GENRES = ['Romantique', 'Comedie', 'Action', 'Horreur'];
     /**
      * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#factories-as-services
      *
@@ -47,7 +48,7 @@ final class GenreFactory extends ModelFactory
     protected function getDefaults(): array
     {
         return [
-            'titre' => self::faker()->text(255),
+            'titre' => self::GENRES[self::faker()->numberBetween(0,3)],
         ];
     }
 

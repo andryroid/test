@@ -41,19 +41,19 @@ class Film
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['film:collection:read','film:item:read'])]
+    #[Groups(['film:collection:read','film:item:read','film:write'])]
     private ?string $titre = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-    #[Groups(['film:collection:read', 'film:item:read'])]
+    #[Groups(['film:collection:read', 'film:item:read','film:write'])]
     private ?\DateTimeInterface $dateDeSortie = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['film:item:read'])]
+    #[Groups(['film:item:read','film:write'])]
     private ?string $resume = null;
 
     #[ORM\Column(nullable: true)]
-    #[Groups(['film:item:read'])]
+    #[Groups(['film:item:read','film:write'])]
     private ?int $note = null;
 
     #[ORM\ManyToOne(inversedBy: 'films')]

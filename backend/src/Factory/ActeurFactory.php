@@ -48,7 +48,7 @@ final class ActeurFactory extends ModelFactory
     {
         return [
             'genre' => self::faker()->numberBetween(1, 32767),
-            'nom' => self::faker()->text(50),
+            'nom' => self::faker()->text(10),
         ];
     }
 
