@@ -2,14 +2,9 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Acteur;
-use App\Entity\Genre;
 use App\Factory\ActeurFactory;
 use App\Factory\FilmFactory;
 use App\Factory\GenreFactory;
-use App\Factory\OwnerFactory;
-use App\Factory\PersonneFactory;
-use App\Factory\PetFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
