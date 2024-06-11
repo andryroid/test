@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Acteur;
 use App\Entity\Genre;
 use App\Factory\ActeurFactory;
 use App\Factory\FilmFactory;
@@ -18,7 +19,14 @@ class AppFixtures extends Fixture
     {
         $acteurs = ActeurFactory::createMany(20);
         $genres = GenreFactory::createMany(5);
-        $films = FilmFactory::createMany(50);
+        $films = FilmFactory::createMany(50, function()
+        {
+            return [
+                'acteur' => ActeurFactory::random(),
+                'genre' => GenreFactory::random()
+            ];
+        }
+        );
         $manager->flush();
     }
 }
