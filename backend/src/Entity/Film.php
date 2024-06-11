@@ -32,7 +32,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
     ]
 )]
 #[ORM\Entity(repositoryClass: FilmRepository::class)]
-#[ApiFilter(SearchFilter::class, properties: ['genre'], strategy: 'partial')]
+#[ApiFilter(SearchFilter::class, properties: ['genre.titre'], strategy: 'partial')]
 class Film
 {
     #[ORM\Id]
