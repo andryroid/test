@@ -2,10 +2,26 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Delete;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Post;
+use ApiPlatform\Metadata\Put;
 use App\Repository\FilmRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
+#[ApiResource(
+    description: 'Api pour ajouter,lister,modifier, supprimer les films',
+    operations: [
+        new Post(),
+        new GetCollection(),
+        new Get(),
+        new Put(),
+        new Delete()
+    ]
+)]
 #[ORM\Entity(repositoryClass: FilmRepository::class)]
 class Film
 {
