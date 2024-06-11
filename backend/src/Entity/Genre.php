@@ -7,6 +7,7 @@ use App\Repository\GenreRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ApiResource(
     description: 'Api pour gérer les genres'
@@ -20,6 +21,7 @@ class Genre
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['film:collection:read'])]
     private ?string $titre = null;
 
     /**

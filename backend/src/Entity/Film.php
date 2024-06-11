@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Delete;
 use ApiPlatform\Metadata\Get;
@@ -11,18 +13,26 @@ use ApiPlatform\Metadata\Put;
 use App\Repository\FilmRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ApiResource(
     description: 'Api pour ajouter,lister,modifier, supprimer les films',
+    normalizationContext: ['groups' => ['film:read']],
+    denormalizationContext: ['groups' => ['film:write']],
     operations: [
-        new Post(),
-        new GetCollection(),
+        new Post(
+            normalizationContext: ['groups' => ['film:item:read']]
+        ),
+        new GetCollection(
+            normalizationContext: ['groups' => ['film:collection:read']]
+        ),
         new Get(),
         new Put(),
         new Delete()
     ]
 )]
 #[ORM\Entity(repositoryClass: FilmRepository::class)]
+#[ApiFilter(SearchFilter::class, properties: ['genre'], strategy: 'partial')]
 class Film
 {
     #[ORM\Id]
@@ -31,23 +41,29 @@ class Film
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['film:collection:read','film:item:read'])]
     private ?string $titre = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    #[Groups(['film:collection:read', 'film:item:read'])]
     private ?\DateTimeInterface $dateDeSortie = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['film:item:read'])]
     private ?string $resume = null;
 
     #[ORM\Column(nullable: true)]
+    #[Groups(['film:item:read'])]
     private ?int $note = null;
 
     #[ORM\ManyToOne(inversedBy: 'films')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['film:collection:read', 'film:item:read'])]
     private ?Genre $genre = null;
 
     #[ORM\ManyToOne(inversedBy: 'films')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['film:item:read'])]
     private ?Acteur $acteur = null;
 
     public function getId(): ?int
