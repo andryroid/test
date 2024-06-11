@@ -36,6 +36,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ApiFilter(SearchFilter::class, properties: ['genre.titre'], strategy: 'partial')]
 class Film
 {
+    private const GENRES = ['Romantique', 'Comedie', 'Action', 'Horreur'];
+
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -63,7 +66,9 @@ class Film
 
     #[ORM\ManyToOne(inversedBy: 'films')]
     #[ORM\JoinColumn(nullable: false)]
-    #[Groups(['film:collection:read', 'film:item:read','film:read'])]
+    #[Groups(['film:collection:read', 'film:item:read','film:read','film:write'])]
+    #[Assert\NotNull()]
+    #[Assert\Choice(self::GENRES,message: 'Genre introuvable')]
     private ?Genre $genre = null;
 
     #[ORM\ManyToOne(inversedBy: 'films')]

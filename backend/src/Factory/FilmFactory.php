@@ -51,6 +51,7 @@ final class FilmFactory extends ModelFactory
             'genre' => GenreFactory::new(),
             'resume' => self::faker()->text(255),
             'titre' => self::faker()->text(255),
+            'dateDeSortie' => self::faker()->dateTime()
         ];
     }
 
