@@ -59,7 +59,6 @@ class Film
 
     #[ORM\Column(nullable: true)]
     #[Groups(['film:item:read','film:write'])]
-    #[Assert\Range([1,10])]
     private ?int $note = null;
 
     #[ORM\ManyToOne(inversedBy: 'films')]
