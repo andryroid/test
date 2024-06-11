@@ -42,33 +42,33 @@ class Film
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['film:collection:read','film:item:read','film:write'])]
+    #[Groups(['film:collection:read','film:item:read','film:write', 'film:read'])]
     #[Assert\NotBlank()]
     #[Assert\NotNull(message: 'Le titre est obligatoire')]
     private ?string $titre = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-    #[Groups(['film:collection:read', 'film:item:read','film:write'])]
+    #[Groups(['film:collection:read', 'film:item:read','film:write','film:read'])]
     private ?\DateTimeInterface $dateDeSortie = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['film:item:read','film:write'])]
+    #[Groups(['film:item:read','film:write','film:read'])]
     #[Assert\NotBlank()]
     #[Assert\NotNull(message: 'Donner quand même un petit résumé')]
     private ?string $resume = null;
 
     #[ORM\Column(nullable: true)]
-    #[Groups(['film:item:read','film:write'])]
+    #[Groups(['film:item:read','film:write','film:read'])]
     private ?int $note = null;
 
     #[ORM\ManyToOne(inversedBy: 'films')]
     #[ORM\JoinColumn(nullable: false)]
-    #[Groups(['film:collection:read', 'film:item:read'])]
+    #[Groups(['film:collection:read', 'film:item:read','film:read'])]
     private ?Genre $genre = null;
 
     #[ORM\ManyToOne(inversedBy: 'films')]
     #[ORM\JoinColumn(nullable: false)]
-    #[Groups(['film:item:read'])]
+    #[Groups(['film:item:read','film:read'])]
     private ?Acteur $acteur = null;
 
     public function getId(): ?int

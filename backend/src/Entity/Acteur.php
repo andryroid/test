@@ -24,7 +24,7 @@ class Acteur
     private ?int $id = null;
 
     #[ORM\Column(length: 50)]
-    #[Groups(['film:item:read'])]
+    #[Groups(['film:item:read','film:read'])]
     private ?string $nom = null;
 
     #[ORM\Column(type: Types::SMALLINT)]
@@ -100,7 +100,7 @@ class Acteur
         return $this;
     }
 
-    #[Groups(['film:item:read'])]
+    #[Groups(['film:item:read','film:read'])]
     public function getSexe(): string
     {
         return $this->genre === 0 ? self::FEMININ : self::MASCULIN;

@@ -21,7 +21,7 @@ class Genre
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['film:collection:read'])]
+    #[Groups(['film:collection:read','film:read'])]
     private ?string $titre = null;
 
     /**
