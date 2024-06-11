@@ -15,6 +15,8 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: ActeurRepository::class)]
 class Acteur
 {
+    private const FEMININ = 'Féminin';
+    private const MASCULIN = 'Masculin';
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -94,5 +96,10 @@ class Acteur
         }
 
         return $this;
+    }
+
+    public function getSexe(): string
+    {
+        return $this->genre === 0 ? self::FEMININ : self::MASCULIN;
     }
 }

@@ -47,7 +47,7 @@ final class ActeurFactory extends ModelFactory
     protected function getDefaults(): array
     {
         return [
-            'genre' => self::faker()->numberBetween(1, 32767),
+            'genre' => self::faker()->numberBetween(0,1),
             'nom' => self::faker()->text(10),
         ];
     }
