@@ -14,6 +14,7 @@ use App\Repository\FilmRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ApiResource(
     description: 'Api pour ajouter,lister,modifier, supprimer les films',
@@ -42,6 +43,8 @@ class Film
 
     #[ORM\Column(length: 255)]
     #[Groups(['film:collection:read','film:item:read','film:write'])]
+    #[Assert\NotBlank()]
+    #[Assert\NotNull(message: 'Le titre est obligatoire')]
     private ?string $titre = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
@@ -50,10 +53,13 @@ class Film
 
     #[ORM\Column(length: 255)]
     #[Groups(['film:item:read','film:write'])]
+    #[Assert\NotBlank()]
+    #[Assert\NotNull(message: 'Donner quand même un petit résumé')]
     private ?string $resume = null;
 
     #[ORM\Column(nullable: true)]
     #[Groups(['film:item:read','film:write'])]
+    #[Assert\Range([1,10])]
     private ?int $note = null;
 
     #[ORM\ManyToOne(inversedBy: 'films')]
